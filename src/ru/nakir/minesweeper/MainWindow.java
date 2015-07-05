@@ -1,7 +1,6 @@
 package ru.nakir.minesweeper;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MainWindow extends JFrame {
     private JLabel time;
@@ -17,7 +16,8 @@ public class MainWindow extends JFrame {
         numberOfMines = new JLabel();
         time = new JLabel();
         add(field);
-        setSize(new Dimension(200, 250));
+        setResizable(false);
+        setSize(field.getFrameSize());
         setVisible(true);
     }
 

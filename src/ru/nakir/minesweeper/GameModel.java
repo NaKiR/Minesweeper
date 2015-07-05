@@ -12,6 +12,7 @@ public class GameModel {
         numberOfMines = 10;
         generateField();
         generateMines();
+        updateField();
     }
 
     public void setWidth(int width) {
@@ -28,7 +29,7 @@ public class GameModel {
         return width;
     }
 
-    public void generateField() {
+    private void generateField() {
         field = new Cell[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -37,11 +38,27 @@ public class GameModel {
         }
     }
 
-    public void generateMines() {
+    private void generateMines() {
         int number = numberOfMines;
         while (number > 0) {
             field[(int)(Math.random()*width)][(int)(Math.random()*height)].setMine();
             number--;
+        }
+    }
+
+    private void updateField() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (field[i][j].isMine()) {
+                    for (int m = i - 1; m <= i + 1; m++) {
+                        for (int k = j - 1; k <= j + 1; k++) {
+                            if (k >= 0 && m >= 0 && k < height && m < width) {
+                                field[m][k].setValue(field[m][k].getValue() + 1);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
