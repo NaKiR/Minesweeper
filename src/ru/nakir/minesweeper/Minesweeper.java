@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Minesweeper {
+    private GameModel model = new GameModel();
+    private MainWindow mainWindow = new MainWindow(model);
 
     public Minesweeper() {}
 
