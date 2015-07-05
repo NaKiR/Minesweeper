@@ -5,6 +5,7 @@ public class Cell {
     private int value;
     private Boolean isMine = false;
     private Boolean isOpen = false;
+    private Boolean isMarked = false;
 
     public Cell(int value) {
         this.value = value;
@@ -30,11 +31,21 @@ public class Cell {
         isMine = true;
     }
 
+    public Boolean isMarked() {
+        return isMarked;
+    }
+
+    public void setMarked(Boolean isMarked) {
+        this.isMarked = isMarked;
+    }
+
     public Boolean isOpen() {
         return isOpen;
     }
 
     public void setOpen(Boolean isOpen) {
-        this.isOpen = isOpen;
+        if (!isMarked) {
+            this.isOpen = isOpen;
+        }
     }
 }

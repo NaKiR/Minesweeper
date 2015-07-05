@@ -28,9 +28,15 @@ public class Field extends JPanel {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
                 if (!field[i][j].isOpen()) {
-                    g.setColor(Color.LIGHT_GRAY);
-                    g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
+                    if (field[i][j].isMarked()) {
+                        g.setColor(Color.YELLOW);
+                        g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
+                    } else {
+                        g.setColor(Color.LIGHT_GRAY);
+                        g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
+                    }
                 } else if (field[i][j].isMine()) {
+//                    JOptionPane.showMessageDialog(null, "You loose!");
                     g.setColor(Color.black);
                     g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
                 } else {
@@ -42,6 +48,7 @@ public class Field extends JPanel {
                                 }
                             }
                         }
+                        repaint();
                     }
                     Font font = g.getFont();
                     FontRenderContext frc = new FontRenderContext(null, true, true);
@@ -60,7 +67,7 @@ public class Field extends JPanel {
     private BufferedImage createImage(Font font, FontRenderContext frc,
                                       int width, int i) {
         String s = Integer.toString(i);
-        Font largeFont = font.deriveFont((float) (width / 2));
+        Font largeFont = font.deriveFont((float) (width / 1.5));
         Rectangle2D r = largeFont.getStringBounds(s, frc);
         int rWidth = (int) Math.round(r.getWidth());
         int rHeight = (int) Math.round(r.getHeight());
