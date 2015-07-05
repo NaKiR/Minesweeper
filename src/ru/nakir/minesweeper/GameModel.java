@@ -69,4 +69,23 @@ public class GameModel {
     public Cell[][] getField() {
         return field;
     }
+
+    public int isEnd() {
+        Boolean temp = true;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (field[i][j].isMine() && field[i][j].isOpen()) {
+                    return -1;
+                }
+                if (!field[i][j].isMine() && !field[i][j].isOpen()) {
+                    temp = false;
+                }
+            }
+        }
+        if (temp) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

@@ -20,6 +20,11 @@ public class MainWindow extends JFrame {
                     if (e.getX() / (Cell.CELL_WIDTH + 2) < model.getField().length && e.getY() / (Cell.CELL_WIDTH + 2) < model.getField()[0].length )
                         tempField[e.getX() / (Cell.CELL_WIDTH + 2)][e.getY() / (Cell.CELL_WIDTH + 2)].setOpen(true);
                     field.repaint();
+                    if (model.isEnd() == 1) {
+                        JOptionPane.showMessageDialog(null, "You win!");
+                    } else if (model.isEnd() == -1) {
+                        JOptionPane.showMessageDialog(null, "You loose!");
+                    }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (e.getX() / (Cell.CELL_WIDTH + 2) < model.getField().length && e.getY() / (Cell.CELL_WIDTH + 2) < model.getField()[0].length )
                         tempField[e.getX() / (Cell.CELL_WIDTH + 2)][e.getY() / (Cell.CELL_WIDTH + 2)].setMarked(

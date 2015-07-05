@@ -19,10 +19,6 @@ public class Cell {
         this.value = value;
     }
 
-    public Boolean isEmptyCell() {
-        return value == 0;
-    }
-
     public Boolean isMine() {
         return isMine;
     }

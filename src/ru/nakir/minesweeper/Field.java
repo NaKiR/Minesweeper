@@ -29,26 +29,33 @@ public class Field extends JPanel {
             for (int j = 0; j < field[i].length; j++) {
                 if (!field[i][j].isOpen()) {
                     if (field[i][j].isMarked()) {
-                        g.setColor(Color.YELLOW);
+                        g.setColor(Color.LIGHT_GRAY);
                         g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
+                        g.setColor(Color.GREEN);
+                        g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH + 4, (j + 1) * 2 + j * Cell.CELL_WIDTH + 4, Cell.CELL_WIDTH - 8, Cell.CELL_WIDTH - 8);
                     } else {
                         g.setColor(Color.LIGHT_GRAY);
                         g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
                     }
                 } else if (field[i][j].isMine()) {
-//                    JOptionPane.showMessageDialog(null, "You loose!");
                     g.setColor(Color.black);
                     g.fillRect((i + 1) * 2 + i * Cell.CELL_WIDTH, (j + 1) * 2 + j * Cell.CELL_WIDTH, Cell.CELL_WIDTH, Cell.CELL_WIDTH);
                 } else {
                     if (field[i][j].getValue() == 0) {
+                        Boolean temp = false;
                         for (int m = i - 1; m <= i + 1; m++) {
                             for (int k = j - 1; k <= j + 1; k++) {
                                 if (k >= 0 && m >= 0 && k < field[i].length && m < field.length) {
+                                    if (!field[m][k].isOpen()) {
+                                        temp = true;
+                                    }
                                     field[m][k].setOpen(true);
                                 }
                             }
                         }
-                        repaint();
+                        if (temp) {
+                            repaint();
+                        }
                     }
                     Font font = g.getFont();
                     FontRenderContext frc = new FontRenderContext(null, true, true);
